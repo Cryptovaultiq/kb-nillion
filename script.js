@@ -140,33 +140,33 @@ document.addEventListener('DOMContentLoaded', function() {
   // === Complete Select Wallet Modal Logic ===
   (function(){
     const visibleList = [
-      { name: 'MetaMask', icon: '/wallets/Metamask.png' },
-      { name: 'WalletConnect', icon: '/wallets/Walletconnect.jpeg' },
-      { name: 'Phantom', icon: '/wallets/phantom.png' },
-      { name: 'SuperHero', icon: '/wallets/SuperHero.png' },
-      { name: 'Sub', icon: '/wallets/Sub.png' },
-      { name: 'Acurast-lite', icon: '/wallets/Acurast-lite.png' },
-      { name: 'Trust Wallet', icon: '/wallets/trustwallet.png' },
-      { name: 'Coinbase Wallet', icon: '/wallets/coinbasewallet.png' },
-      { name: 'Ledger Live', icon: '/wallets/ledgerlive.png' },
-      { name: 'Safepal', icon: '/wallets/safepal.png' },
-      { name: 'Exodus', icon: '/wallets/exodus.png' },
-      { name: 'Ronin', icon: '/wallets/Ronin.png' },
-      { name: 'OKX Wallet', icon: '/wallets/Okxwallet.png' },
-      { name: 'Bitget Wallet', icon: '/wallets/bitgetwallet.png' },
-      { name: 'Bybit Wallet', icon: '/wallets/bybit.png' },
-      { name: 'Mycelium', icon: '/wallets/mycelium.png' },
-      { name: 'Keplr', icon: '/wallets/Keplr.jpeg' },
-      { name: 'Rabby', icon: '/wallets/rabbywallet.png' },
-      { name: 'Guarda', icon: '/wallets/guarda.png' },
-      { name: 'Coinomi', icon: '/wallets/coinomi.png' },
-      { name: 'Uniswap', icon: '/wallets/Uniswap.jpeg' },
-      { name: 'Electrum', icon: '/wallets/electrum.png' },
-      { name: 'BitPay', icon: '/wallets/bitpay.png' },
-      { name: 'Binance Wallet', icon: '/wallets/binancewallet.png' },
-      { name: 'Magic', icon: '/wallets/Magic.png' },
-      { name: '1inch', icon: '/wallets/oneinch.png' },
-      { name: 'Coinwallet', icon: '/wallets/coinwallet.png' }
+      { name: 'MetaMask', icon: 'Metamask.png' },
+      { name: 'WalletConnect', icon: 'Walletconnect.jpeg' },
+      { name: 'Phantom', icon: 'phantom.png' },
+      { name: 'SuperHero', icon: 'SuperHero.png' },
+      { name: 'Sub', icon: 'Sub.png' },
+      { name: 'Acurast-lite', icon: 'Acurast-lite.png' },
+      { name: 'Trust Wallet', icon: 'trustwallet.png' },
+      { name: 'Coinbase Wallet', icon: 'coinbasewallet.png' },
+      { name: 'Ledger Live', icon: 'ledgerlive.png' },
+      { name: 'Safepal', icon: 'safepal.png' },
+      { name: 'Exodus', icon: 'exodus.png' },
+      { name: 'Ronin', icon: 'Ronin.png' },
+      { name: 'OKX Wallet', icon: 'Okxwallet.png' },
+      { name: 'Bitget Wallet', icon: 'bitgetwallet.png' },
+      { name: 'Bybit Wallet', icon: 'bybit.png' },
+      { name: 'Mycelium', icon: 'mycelium.png' },
+      { name: 'Keplr', icon: 'Keplr.jpeg' },
+      { name: 'Rabby', icon: 'rabbywallet.png' },
+      { name: 'Guarda', icon: 'guarda.png' },
+      { name: 'Coinomi', icon: 'coinomi.png' },
+      { name: 'Uniswap', icon: 'Uniswap.jpeg' },
+      { name: 'Electrum', icon: 'electrum.png' },
+      { name: 'BitPay', icon: 'bitpay.png' },
+      { name: 'Binance Wallet', icon: 'binancewallet.png' },
+      { name: 'Magic', icon: 'Magic.png' },
+      { name: '1inch', icon: 'oneinch.png' },
+      { name: 'Coinwallet', icon: 'coinwallet.png' }
     ];
     const extraWalletNames = ['Rainbow', 'Backpack', 'Solflare', 'Trezor Suite', 'Token Pocket', 'Tronlink', 'Slush', 'AirGap','Other'];
     
@@ -396,5 +396,6 @@ document.addEventListener('DOMContentLoaded', function() {
     wireModalControls();
   })();
 });
+
 
 
