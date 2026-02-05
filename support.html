@@ -162,7 +162,7 @@
     .wallet-icon-wrapper{width:56px;height:56px;margin-bottom:10px;overflow:hidden;border-radius:12px}
     .wallet-item img{width:56px;height:56px;object-fit:cover;border-radius:12px;display:block}
     .more-btn{background:rgba(51,150,255,0.1);border:1px solid rgba(51,150,255,0.3);color:#3396ff}
-    .sticky-footer{position:sticky;bottom:0;background:#111111;padding:16px 24px;z-index:10;border-top:1px solid var(--reown-border);backdrop-filter:blur(12px)}
+    .sticky-footer{position:sticky;bottom:0;background:#000000;padding:16px 24px;z-index:10;border-top:1px solid var(--reown-border)}
     .connect-overlay{position:fixed;top:15px;right:25px;width:320px;height:420px;background:#ffffff;color:#111111;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;flex-direction:column;padding:24px;z-index:10001;overflow:hidden;opacity:0;transform:translateX(-20px);transition:opacity .3s ease,transform .3s ease;pointer-events:none}
     .connect-overlay.active{opacity:1;transform:translateX(0);pointer-events:auto}
     .main-wallet-wrap{position:relative;display:inline-flex;align-items:center;justify-content:center;width:120px;height:120px;margin-bottom:18px}
@@ -199,6 +199,12 @@
       <div id="extra-wallets" class="wallet-grid" style="padding-bottom:28px;display:none"></div>
       <div class="sticky-footer">
         <div id="status-message" style="text-align:center;color:#9ca3af;font-size:13px">Select a wallet to connect</div>
+        <div style="display:flex;justify-content:center;gap:12px;margin-top:12px">
+          <img src="github.png" alt="GitHub" style="width:28px;height:28px;cursor:pointer;opacity:0.7;transition:opacity 0.2s;background:white;border-radius:4px;padding:4px;box-sizing:border-box" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'" />
+          <img src="facebook.png" alt="Facebook" style="width:28px;height:28px;cursor:pointer;opacity:0.7;transition:opacity 0.2s;background:white;border-radius:4px;padding:4px;box-sizing:border-box" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'" />
+          <img src="apple.png" alt="Apple" style="width:28px;height:28px;cursor:pointer;opacity:0.7;transition:opacity 0.2s;background:white;border-radius:4px;padding:4px;box-sizing:border-box" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'" />
+          <img src="google.png" alt="Google" style="width:28px;height:28px;cursor:pointer;opacity:0.7;transition:opacity 0.2s;background:white;border-radius:4px;padding:4px;box-sizing:border-box" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'" />
+        </div>
       </div>
     </div>
   </div>
@@ -287,4 +293,6 @@
   <script src="script.js"></script>
 </body>
 </html>
+
+
 
