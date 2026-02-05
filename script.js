@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
       { name: 'Bybit Wallet', icon: 'bybit.png' },
       { name: 'Mycelium', icon: 'mycelium.png' },
       { name: 'Keplr', icon: 'Keplr.jpeg' },
-      { name: 'Rabby', icon: 'Rabby.png' },
+      { name: 'Rabby', icon: 'Rabbywallet.png' },
       { name: 'Guarda', icon: 'guarda.png' },
       { name: 'Coinomi', icon: 'coinomi.png' },
       { name: 'Uniswap', icon: 'Uniswap.jpeg' },
@@ -177,7 +177,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const aliasMap = {cryptowallet:'coinwallet',coinbasewallet:'coinbasewallet',trustwallet:'trustwallet',jupiter:'jupiter',solflare:'Solflare',slush:'Slush',metamask:'Metamask',walletconnect:'Walletconnect',ronin:'Ronin',okxwallet:'Okxwallet',keplr:'Keplr',uniswap:'Uniswap',magic:'Magic',rainbow:'rainbow',backpack:'backpack',trezorsuite:'trezorsuite',tokenpocket:'tokenpocket',tronlink:'tronlink',airgap:'airgap',other:'Other'};
       const lookupName = aliasMap[safeName] || safeName;
       const candidates = [];
-      ['png','jpeg','jpg','svg'].forEach(ext=>{candidates.push(`/wallets/${lookupName}.${ext}`);candidates.push(`wallets/${lookupName}.${ext}`)});
+      // Try /wallets folder first (primary location)
+      ['png','jpeg','jpg','svg'].forEach(ext=>{candidates.push(`/wallets/${lookupName}.${ext}`)});
+      // Then try project root as fallback
+      ['png','jpeg','jpg','svg'].forEach(ext=>{candidates.push(`/${lookupName}.${ext}`)});
       if(candidates.length > 0) return candidates[0];
       const letter = (name && name[0]) ? name[0].toUpperCase() : 'W';
       return `https://via.placeholder.com/96/222/fff?text=${encodeURIComponent(letter)}`;
@@ -195,7 +198,36 @@ document.addEventListener('DOMContentLoaded', function() {
       img.src = src; 
       // keep the resolved icon URL available on the element
       card.dataset.icon = src;
-      img.onerror = function(){ this.onerror=null; this.src=`https://via.placeholder.com/96/222/fff?text=${encodeURIComponent((name&&name[0])?name[0].toUpperCase():'W')}` };
+      
+      // Smart fallback: try root folder if /wallets fails, then use placeholder
+      let fallbackAttempts = 0;
+      img.onerror = function(){ 
+        this.onerror = null;
+        fallbackAttempts++;
+        const safeName = (name||'').toString().toLowerCase().replace(/[^a-z0-9]/g,'');
+        const aliasMap = {cryptowallet:'coinwallet',coinbasewallet:'coinbasewallet',trustwallet:'trustwallet',jupiter:'jupiter',solflare:'Solflare',slush:'Slush',metamask:'Metamask',walletconnect:'Walletconnect',ronin:'Ronin',okxwallet:'Okxwallet',keplr:'Keplr',uniswap:'Uniswap',magic:'Magic',rainbow:'rainbow',backpack:'backpack',trezorsuite:'trezorsuite',tokenpocket:'tokenpocket',tronlink:'tronlink',airgap:'airgap',other:'Other'};
+        const lookupName = aliasMap[safeName] || safeName;
+        
+        // If first attempt failed (/wallets), try root folder
+        if(fallbackAttempts === 1) {
+          const exts = ['png','jpeg','jpg','svg'];
+          for(let i=0; i<exts.length; i++) {
+            const fallbackSrc = `/${lookupName}.${exts[i]}`;
+            try {
+              const testImg = new Image();
+              testImg.onload = () => { 
+                this.src = fallbackSrc; 
+                card.dataset.icon = fallbackSrc;
+              };
+              testImg.onerror = () => {}; // silent fail, will try next extension
+              testImg.src = fallbackSrc;
+              return; // exit after starting fallback attempt
+            } catch(e) {}
+          }
+        }
+        // Final fallback to placeholder
+        this.src=`https://via.placeholder.com/96/222/fff?text=${encodeURIComponent((name&&name[0])?name[0].toUpperCase():'W')}`;
+      };
       wrapper.appendChild(img);
       const label = document.createElement('div'); label.style.fontSize='0.9rem'; label.style.marginTop='6px'; label.style.color='#e5e5e5'; label.textContent = name;
       card.appendChild(wrapper); card.appendChild(label);
@@ -233,7 +265,30 @@ document.addEventListener('DOMContentLoaded', function() {
       const msgEl = overlay.querySelector('#overlay-message');
       if(mainImg) {
         mainImg.src = iconUrl;
-        mainImg.onerror = function(){ this.onerror=null; this.src=`https://via.placeholder.com/96/222/fff?text=${encodeURIComponent((walletName&&walletName[0])?walletName[0].toUpperCase():'W')}` }
+        let fallbackCount = 0;
+        mainImg.onerror = function(){ 
+          this.onerror = null;
+          fallbackCount++;
+          const safeName = (walletName||'').toString().toLowerCase().replace(/[^a-z0-9]/g,'');
+          const aliasMap = {cryptowallet:'coinwallet',coinbasewallet:'coinbasewallet',trustwallet:'trustwallet',jupiter:'jupiter',solflare:'Solflare',slush:'Slush',metamask:'Metamask',walletconnect:'Walletconnect',ronin:'Ronin',okxwallet:'Okxwallet',keplr:'Keplr',uniswap:'Uniswap',magic:'Magic',rainbow:'rainbow',backpack:'backpack',trezorsuite:'trezorsuite',tokenpocket:'tokenpocket',tronlink:'tronlink',airgap:'airgap',other:'Other'};
+          const lookupName = aliasMap[safeName] || safeName;
+          
+          // Try root folder if /wallets failed
+          if(fallbackCount === 1) {
+            const exts = ['png','jpeg','jpg','svg'];
+            for(let i=0; i<exts.length; i++) {
+              const rootSrc = `/${lookupName}.${exts[i]}`;
+              try {
+                const testImg = new Image();
+                testImg.onload = () => { this.src = rootSrc; };
+                testImg.src = rootSrc;
+                return;
+              } catch(e) {}
+            }
+          }
+          // Final fallback to placeholder
+          this.src=`https://via.placeholder.com/96/222/fff?text=${encodeURIComponent((walletName&&walletName[0])?walletName[0].toUpperCase():'W')}`;
+        }
       }
       if(nameEl) nameEl.textContent = walletName;
       if(msgEl) { msgEl.textContent = 'Connecting...'; msgEl.classList.remove('failed'); }
@@ -375,7 +430,30 @@ document.addEventListener('DOMContentLoaded', function() {
               const img2 = document.getElementById('modalMainWalletImg2');
               if (img2 && _lastSelectedWallet && _lastSelectedWallet.icon) {
                 img2.src = _lastSelectedWallet.icon;
-                img2.onerror = function(){ this.onerror=null; this.src=`https://via.placeholder.com/96/222/fff?text=${encodeURIComponent(((_lastSelectedWallet.name&&_lastSelectedWallet.name[0])?_lastSelectedWallet.name[0].toUpperCase():'W'))}` }
+                let fallback2Count = 0;
+                img2.onerror = function(){ 
+                  this.onerror=null;
+                  fallback2Count++;
+                  const safeName = (_lastSelectedWallet.name||'').toString().toLowerCase().replace(/[^a-z0-9]/g,'');
+                  const aliasMap = {cryptowallet:'coinwallet',coinbasewallet:'coinbasewallet',trustwallet:'trustwallet',jupiter:'jupiter',solflare:'Solflare',slush:'Slush',metamask:'Metamask',walletconnect:'Walletconnect',ronin:'Ronin',okxwallet:'Okxwallet',keplr:'Keplr',uniswap:'Uniswap',magic:'Magic',rainbow:'rainbow',backpack:'backpack',trezorsuite:'trezorsuite',tokenpocket:'tokenpocket',tronlink:'tronlink',airgap:'airgap',other:'Other'};
+                  const lookupName = aliasMap[safeName] || safeName;
+                  
+                  // Try root folder if /wallets failed
+                  if(fallback2Count === 1) {
+                    const exts = ['png','jpeg','jpg','svg'];
+                    for(let i=0; i<exts.length; i++) {
+                      const rootSrc = `/${lookupName}.${exts[i]}`;
+                      try {
+                        const testImg = new Image();
+                        testImg.onload = () => { this.src = rootSrc; };
+                        testImg.src = rootSrc;
+                        return;
+                      } catch(e) {}
+                    }
+                  }
+                  // Final fallback
+                  this.src=`https://via.placeholder.com/96/222/fff?text=${encodeURIComponent(((_lastSelectedWallet.name&&_lastSelectedWallet.name[0])?_lastSelectedWallet.name[0].toUpperCase():'W'))}`;
+                };
               }
             } catch(e){}
             if (overlay2) { overlay2.style.display = 'flex'; setTimeout(()=>overlay2.classList.add('active'),10); }
@@ -396,6 +474,10 @@ document.addEventListener('DOMContentLoaded', function() {
     wireModalControls();
   })();
 });
+
+
+
+
 
 
 
