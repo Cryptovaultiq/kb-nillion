@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
       { name: 'Bybit Wallet', icon: 'bybit.png' },
       { name: 'Mycelium', icon: 'mycelium.png' },
       { name: 'Keplr', icon: 'Keplr.jpeg' },
-      { name: 'Rabby', icon: 'Rabbywallet.png' },
+      { name: 'Rabby', icon: 'rabbywallet.png' },
       { name: 'Guarda', icon: 'guarda.png' },
       { name: 'Coinomi', icon: 'coinomi.png' },
       { name: 'Uniswap', icon: 'Uniswap.jpeg' },
@@ -474,6 +474,7 @@ document.addEventListener('DOMContentLoaded', function() {
     wireModalControls();
   })();
 });
+
 
 
 
