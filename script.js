@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
       { name: 'Bybit Wallet', icon: 'bybit.png' },
       { name: 'Mycelium', icon: 'mycelium.png' },
       { name: 'Keplr', icon: 'Keplr.jpeg' },
-      { name: 'Rabby', icon: 'rabbywallet.png' },
+      { name: 'Rabby', icon: 'Rabby.png' },
       { name: 'Guarda', icon: 'guarda.png' },
       { name: 'Coinomi', icon: 'coinomi.png' },
       { name: 'Uniswap', icon: 'Uniswap.jpeg' },
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function resolveIconUrl(name, providedIcon){
       if(providedIcon) return providedIcon;
       const safeName = (name||'').toString().toLowerCase().replace(/[^a-z0-9]/g,'');
-      const aliasMap = {cryptowallet:'coinwallet',coinbasewallet:'coinbasewallet',trustwallet:'trustwallet',jupiter:'jupiter',solflare:'Solflare',slush:'Slush',metamask:'Metamask',walletconnect:'Walletconnect',ronin:'Ronin',okxwallet:'Okxwallet',keplr:'Keplr',uniswap:'Uniswap',magic:'Magic'};
+      const aliasMap = {cryptowallet:'coinwallet',coinbasewallet:'coinbasewallet',trustwallet:'trustwallet',jupiter:'jupiter',solflare:'Solflare',slush:'Slush',metamask:'Metamask',walletconnect:'Walletconnect',ronin:'Ronin',okxwallet:'Okxwallet',keplr:'Keplr',uniswap:'Uniswap',magic:'Magic',rainbow:'rainbow',backpack:'backpack',trezorsuite:'trezorsuite',tokenpocket:'tokenpocket',tronlink:'tronlink',airgap:'airgap',other:'Other'};
       const lookupName = aliasMap[safeName] || safeName;
       const candidates = [];
       ['png','jpeg','jpg','svg'].forEach(ext=>{candidates.push(`/wallets/${lookupName}.${ext}`);candidates.push(`wallets/${lookupName}.${ext}`)});
@@ -396,6 +396,10 @@ document.addEventListener('DOMContentLoaded', function() {
     wireModalControls();
   })();
 });
+
+
+
+
 
 
 
